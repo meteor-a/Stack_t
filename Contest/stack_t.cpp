@@ -5,6 +5,8 @@ TypeError StackConstructor_(Stack_t* stack DEBUG_CODE_ADD(, LOCATION location_ca
         StackAbort(stack, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, location_call));
     }
 
+    stack->location = {};
+
     if (CheckIsWasAlreadyConstract(stack DEBUG_CODE_ADD(, location_call))) {
         StackAbort(stack, TypeError::_ERROR_REPEAT_CONSTRACT DEBUG_CODE_ADD(, location_call));
     }
@@ -17,7 +19,7 @@ TypeError StackConstructor_(Stack_t* stack DEBUG_CODE_ADD(, LOCATION location_ca
     DEBUG_CODE_ADD(stack->location = location_call;);
 
     stack->capacity = DEFAULT_CAPACITY;
-    stack->size = 0;
+    stack->size     = 0;
 
     stack->data = nullptr;
 
@@ -117,7 +119,7 @@ TypeError StackPop(Stack_t* stack) {
 
     if (stack->size - 1 < 0) {
         StackAbort(stack, TypeError::_ERROR_POP_ON_EMPTY_STACK DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__,
-                    stack->location.var_type, "stack" }));
+                    stack->location.var_type, stack->location.var_name }));
     }
 
     stack->data[stack->size - 1] = DEFAULT_EMPTY_ELEM_OF_STACK;
@@ -140,7 +142,7 @@ StackElem_t StackTop(Stack_t* stack) {
 
     if (stack->size - 1 < 0) {
         StackAbort(stack, TypeError::_ERROR_TOP_ON_EMPTY_STACK DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__,
-                   stack->location.var_type, "stack" }));
+                   stack->location.var_type, stack->location.var_name }));
     }
 
     return stack->data[stack->size - 1];
@@ -165,11 +167,11 @@ TypeError StackDataAllocation(Stack_t* stack) {
     } else if (stack->size == 0 && stack->capacity == DEFAULT_CAPACITY && stack->data ==  nullptr) {   // INIZIALIZE
         if (stack == nullptr) {
             StackAbort(stack, TypeError::_ERROR_NULL_OBJ DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__,
-                       typeid(StackElem_t).name(), "stack" }));
+                       typeid(StackElem_t).name(), "nullptr" }));
         }
         if (_txIsBadReadPtr(stack)) {
             StackAbort(stack, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__,
-                       typeid(StackElem_t).name(), "stack" }));
+                       typeid(StackElem_t).name(), "_ERROR__" }));
         }
     }
     else {
@@ -183,7 +185,7 @@ TypeError StackDataAllocation(Stack_t* stack) {
 
     if (stack->data == nullptr) {
         StackAbort(stack, TypeError::_ERROR_NULL_POINTER_DATA DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__,
-                   typeid(StackElem_t).name(), "stack" }));
+                   typeid(StackElem_t).name(), stack->location.var_name }));
     }
 #endif
 
@@ -197,7 +199,7 @@ TypeError StackDataAllocation(Stack_t* stack) {
 
     if (stack->data == nullptr) {
         StackAbort(stack, TypeError::_ERROR_NULL_POINTER_DATA DEBUG_CODE_ADD(, LOCATION{ __FILE__, __FUNCTION__, __LINE__,
-                   typeid(StackElem_t).name(), "stack" }));
+                   typeid(StackElem_t).name(), stack->location.var_name }));
     }
 
     *((StackCanaryElem_t*) stack->data) = CANARY_DEFAULT_DATA_START;

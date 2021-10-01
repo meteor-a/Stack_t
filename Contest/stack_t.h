@@ -12,7 +12,7 @@
 #define DEBUG_MODE DEBUG_MODE_ON
 
 #ifndef DEBUG_MODE
-#define DEBUG_MODE DEBUG_MODE_OFF
+    #define DEBUG_MODE DEBUG_MODE_OFF
 #endif
 
 #define STACK_WITHOUT_PROTECTION  0
@@ -23,7 +23,7 @@
 #define STACK_LEVEL_PROTECTION     STACK_HASH_PROTECTION
 
 #ifndef STACK_LEVEL_PROTECTION
-#define STACK_LEVEL_PROTECTION STACK_HASH_PROTECTION
+    #define STACK_LEVEL_PROTECTION STACK_HASH_PROTECTION
 #endif
 
 enum class TypeError {
@@ -113,18 +113,18 @@ struct Stack_t {
 #define StackType
 
 #if DEBUG_MODE == DEBUG_MODE_ON
-#define ASSERT_OK(obj)                                                                \
-    if (StackType##OK(obj) != TypeError::_SUCCESSFUL) {                               \
-        StackAbort(obj, StackType##OK(obj), LOCATION{ __FILE__, __func__, __LINE__,   \
-                   typeid(StackElem_t).name(), #obj });                               \
+    #define ASSERT_OK(obj)                                                                \
+        if (StackType##OK(obj) != TypeError::_SUCCESSFUL) {                               \
+            StackAbort(obj, StackType##OK(obj), LOCATION{ __FILE__, __func__, __LINE__,   \
+                       typeid(StackElem_t).name(), #obj });                               \
     }
 #endif
 
 #if DEBUG_MODE == DEBUG_MODE_OFF
-#define ASSERT_OK(obj)                                      \
-    if (StackType##OK(obj) != TypeError::_SUCCESSFUL) {     \
-        StackAbort(obj, StackType##OK(obj));                \
-    }
+    #define ASSERT_OK(obj)                                      \
+        if (StackType##OK(obj) != TypeError::_SUCCESSFUL) {     \
+            StackAbort(obj, StackType##OK(obj));                \
+        }
 #endif
 
 #if DEBUG_MODE == DEBUG_MODE_ON
@@ -136,6 +136,7 @@ struct Stack_t {
     #define StackConstructor(stack) StackConstructor_(&stack);
 #endif
 
+/*-------------------------------------------------------------------------*/
 
 TypeError StackConstructor_          (Stack_t* stack DEBUG_CODE_ADD(, LOCATION location_call));
 bool      CheckIsWasAlreadyConstract (Stack_t* stack DEBUG_CODE_ADD(, LOCATION location_call));
