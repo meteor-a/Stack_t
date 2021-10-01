@@ -60,7 +60,7 @@ enum class Poison {
 struct LOCATION {
     const char* file_name;
     const char* func_name;
-    size_t      num_line;
+    long long   num_line;
     const char* var_type;
     const char* var_name;
 };
@@ -118,9 +118,14 @@ struct Stack_t {
         StackAbort(obj, StackType##OK(obj) DEBUG_CODE(, LOCATION{__FILE__, __FUNCTION__, __LINE__, typeid(StackElem_t).name(), #obj}));     \
     }
 
-#define StackConstructor(stack) StackConstructor_(&stack DEBUG_CODE(, LOCATION{__FILE__, __FUNCTION__, __LINE__, typeid(StackElem_t).name(), #stack}));
+#if DEBUG_MODE == DEBUG_MODE_ON
+TypeError StackConstructor_(Stack_t* stack, LOCATION location_call);
+#define StackConstructor(stack) StackConstructor_(&stack, LOCATION {__FILE__, __FUNCTION__, __LINE__, typeid(StackElem_t).name(), #stack});
+#elif
+TypeError StackConstructor_(Stack_t* stack);
+#define StackConstructor(stack) StackConstructor_(&stack);
+#endif
 
-TypeError StackConstructor_(Stack_t* stack DEBUG_CODE(, LOCATION location_call));
 bool      CheckIsWasAlreadyConstract(Stack_t* stack DEBUG_CODE(, LOCATION location_call));
 
 TypeError StackDestructor(Stack_t* stack);

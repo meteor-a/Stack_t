@@ -22,6 +22,8 @@ TypeError StackConstructor_(Stack_t* stack, LOCATION location_call) {
     stack->capacity = DEFAULT_CAPACITY;
     stack->size = 0;
 
+    stack->data = nullptr;
+
     StackDataAllocation(stack);
 
 #if STACK_LEVEL_PROTECTION >= STACK_HASH_PROTECTION 
@@ -104,8 +106,9 @@ TypeError StackPush(Stack_t* stack, StackElem_t val) {
 #if STACK_LEVEL_PROTECTION >= STACK_HASH_PROTECTION
     HashReCalculate(stack);
 #endif
-
-    StackDataAllocation(stack);
+    if (stack->size == stack->capacity) {
+        StackDataAllocation(stack);
+    }
 
     ASSERT_OK(stack);
 
@@ -125,8 +128,9 @@ TypeError StackPop(Stack_t* stack) {
 #if STACK_LEVEL_PROTECTION >= STACK_HASH_PROTECTION
     HashReCalculate(stack);
 #endif
-
-    StackDataAllocation(stack);
+    if (stack->capacity == stack->size + STACK_RESIZE_MORE_CONST * 2) {
+        StackDataAllocation(stack);
+    }
 
     ASSERT_OK(stack);
 
@@ -144,19 +148,22 @@ StackElem_t StackTop(Stack_t* stack) {
 }
 
 TypeError StackDataAllocation(Stack_t* stack) {
-    long long capacity_old = -1;
-    bool is_need_hash_recalculate = false;
+    long long capacity_old         = -1;
+    bool is_need_hash_recalculate  = false;
+    bool is_need_move_pointer_data = false;
 
     if (stack->size == stack->capacity) {   // UP
         ASSERT_OK(stack);
         capacity_old = stack->capacity;
         stack->capacity += STACK_RESIZE_MORE_CONST;
-        is_need_hash_recalculate = true;
+        is_need_hash_recalculate  = true;
+        is_need_move_pointer_data = true;
     } else if (stack->capacity - STACK_RESIZE_MORE_CONST * 2 >= stack->size) {  // DOWN
         ASSERT_OK(stack);
         stack->capacity -= STACK_RESIZE_MORE_CONST;
-        is_need_hash_recalculate = true;
-    } else if (stack->size == 0 && stack->capacity == DEFAULT_CAPACITY) {   // INIZIALIZE
+        is_need_hash_recalculate  = true;
+        is_need_move_pointer_data = true;
+    } else if (stack->size == 0 && stack->capacity == DEFAULT_CAPACITY && stack->data ==  nullptr) {   // INIZIALIZE
         if (stack == nullptr) {
             StackAbort(stack, TypeError::_ERROR_NULL_OBJ DEBUG_CODE(, LOCATION{ __FILE__, __FUNCTION__, __LINE__, typeid(StackElem_t).name(), "stack" }));
         }
@@ -181,7 +188,9 @@ TypeError StackDataAllocation(Stack_t* stack) {
 #if STACK_LEVEL_PROTECTION >= STACK_CANARY_PROTECTION
     long long new_size = stack->capacity * sizeof(StackElem_t) + 2 * sizeof(StackCanaryElem_t);
 
-    stack->data = (StackElem_t*) ((char*)stack->data - sizeof(StackCanaryElem_t));
+    if (is_need_move_pointer_data) {
+        stack->data = (StackElem_t*)((char*)stack->data - sizeof(StackCanaryElem_t));
+    }
     stack->data = (StackElem_t*) ((char*)realloc((char*)stack->data, new_size));
 
     if (stack->data == nullptr) {
