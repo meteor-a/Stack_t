@@ -86,7 +86,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Contest.cpp" />
     <ClCompile Include="stack_t.cpp" />
+    <ClCompile Include="stack_t_unit_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stack_t.h" />

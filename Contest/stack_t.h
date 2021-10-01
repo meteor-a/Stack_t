@@ -70,7 +70,7 @@ typedef int StackElem_t;
 typedef unsigned long long StackCanaryElem_t;
 
 #define DEFAULT_CAPACITY            16
-#define DEFAULT_EMPTY_ELEM_OF_STACK 666
+#define DEFAULT_EMPTY_ELEM_OF_STACK -666
 
 #define STACK_RESIZE_MORE_CONST     16
 
@@ -103,11 +103,11 @@ struct Stack_t {
 #endif
 };
 
-#if DEBUG_MODE == DEBUG_MODE_ON
-#define DEBUG_CODE(code) code
-#elif
-#define DEBUG_CODE(code)
-#endif
+//#if DEBUG_MODE == DEBUG_MODE_ON
+//#define DEBUG_CODE(code) code
+//#elif
+//#define DEBUG_CODE(code)
+//#endif
 
 /*-------------------------------------------------------------------------*/
 
@@ -115,7 +115,7 @@ struct Stack_t {
 
 #define ASSERT_OK(obj)                                                                  \
     if (StackType##OK(obj) != TypeError::_SUCCESSFUL) {                                 \
-        StackAbort(obj, StackType##OK(obj) DEBUG_CODE(, LOCATION{__FILE__, __FUNCTION__, __LINE__, typeid(StackElem_t).name(), #obj}));     \
+        StackAbort(obj, StackType##OK(obj), LOCATION{__FILE__, __FUNCTION__, __LINE__, typeid(StackElem_t).name(), #obj});     \
     }
 
 #if DEBUG_MODE == DEBUG_MODE_ON
@@ -126,7 +126,7 @@ TypeError StackConstructor_(Stack_t* stack);
 #define StackConstructor(stack) StackConstructor_(&stack);
 #endif
 
-bool      CheckIsWasAlreadyConstract(Stack_t* stack DEBUG_CODE(, LOCATION location_call));
+bool      CheckIsWasAlreadyConstract(Stack_t* stack, LOCATION location_call);
 
 TypeError StackDestructor(Stack_t* stack);
 
@@ -158,5 +158,6 @@ long long HashFunc       (void* start_hash, void* end_hash);
 
 /*-------------------------------------------------------------------------*/
 
-void StackAbort(Stack_t* stack, TypeError err_ DEBUG_CODE(, LOCATION location_call));
-void StackDump (Stack_t* stack, TypeError err_ DEBUG_CODE(, LOCATION location_call));
+void        StackAbort        (Stack_t* stack, TypeError err_, LOCATION location_call);
+const char* StackGetTextError (TypeError err);
+void        StackDump         (Stack_t* stack, TypeError err_, LOCATION location_call);

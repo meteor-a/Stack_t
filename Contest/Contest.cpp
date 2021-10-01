@@ -4,7 +4,14 @@
 int main() {
     Stack_t stack = {};
     StackConstructor(stack);
-    StackDestructor(&stack);
-    stack.capacity = 2;
-    StackPush(&stack, 5);
+
+     for (int ii = 0; ii < 500; ++ii) {
+        StackPush(&stack, ii);
+    }
+     for (int ii = 0; ii < 500; ++ii) {
+         StackPop(&stack);
+     }
+     StackPop(&stack);
+
+    int tt = 0;
 }

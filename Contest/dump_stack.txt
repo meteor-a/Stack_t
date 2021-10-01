@@ -1,0 +1,36 @@
+
+---------------------------------
+
+Current time: Fri Oct  1 21:22:02 2021
+
+
+Time of last build: Oct  1 2021  21:21:31
+
+Error: Try to pop on empty stack
+
+Declareded variable: stack<int> [0x00DCFB3C] in File: D:\vs_project\Contest\Contest\Contest.cpp   in Function: main    in Line: 6
+
+Now variable: stack<int> [0x00DCFB3C] in File: D:\vs_project\Contest\Contest\stack_t.cpp   in Function: StackPop    in Line: 122
+	capacity: 16
+	size:     0
+
+	data[0x010139E0] {
+		 [0] = -666
+		 [1] = -666
+		 [2] = -666
+		 [3] = -666
+		 [4] = -666
+		 [5] = -666
+		 [6] = -666
+		 [7] = -666
+		 [8] = -666
+		 [9] = -666
+		 [10] = -666
+		 [11] = -666
+		 [12] = -666
+		 [13] = -666
+		 [14] = -666
+		 [15] = -666
+	}
+
+---------------------------------
