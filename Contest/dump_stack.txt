@@ -1,36 +1,48 @@
 
 ---------------------------------
 
-Current time: Fri Oct  1 21:22:02 2021
+Current time: Fri Oct  1 19:18:38 2021
 
 
-Time of last build: Oct  1 2021  21:21:31
+Time of last build: Oct  1 2021  19:18:34
 
-Error: Try to pop on empty stack
+Error: Hash struct stack was changed
 
-Declareded variable: stack<int> [0x00DCFB3C] in File: D:\vs_project\Contest\Contest\Contest.cpp   in Function: main    in Line: 6
+Declareded variable: stack<int> [0xb40ff9b0] in File: C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\Contest.cpp   in Function: main    in Line: 6
 
-Now variable: stack<int> [0x00DCFB3C] in File: D:\vs_project\Contest\Contest\stack_t.cpp   in Function: StackPop    in Line: 122
+Now variable: stack<int> [0xb40ff9b0] in File: C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp   in Function: StackDestructor    in Line: 72
 	capacity: 16
-	size:     0
+	size:     5
 
-	data[0x010139E0] {
-		 [0] = -666
-		 [1] = -666
-		 [2] = -666
-		 [3] = -666
-		 [4] = -666
-		 [5] = -666
-		 [6] = -666
-		 [7] = -666
-		 [8] = -666
-		 [9] = -666
-		 [10] = -666
-		 [11] = -666
-		 [12] = -666
-		 [13] = -666
-		 [14] = -666
-		 [15] = -666
+	canary_start_struct:         1548693173
+	default canary_start_struct: 1548693173
+
+	canary_end_struct:           1934672158
+	default canary_end_struct:   1934672158
+
+	hash_struct_last_changed:    510629749
+	hash_struct_now:             -219056725
+
+	hash_data_last_changed:      1756675904
+	hash_data_now:               1756675904
+
+	data[0xc4e35a68] {
+		* [0] = -842150451
+		* [1] = -842150451
+		* [2] = -842150451
+		* [3] = -842150451
+		* [4] = -842150451
+		 [5] = -842150451
+		 [6] = -842150451
+		 [7] = -842150451
+		 [8] = -842150451
+		 [9] = -842150451
+		 [10] = -842150451
+		 [11] = -842150451
+		 [12] = -842150451
+		 [13] = -842150451
+		 [14] = -842150451
+		 [15] = -842150451
 	}
 
 ---------------------------------

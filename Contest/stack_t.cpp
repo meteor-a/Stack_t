@@ -482,6 +482,8 @@ void StackDump(Stack_t* stack, TypeError err_ , LOCATION location_call) {
 
     const char* text_err = StackGetTextError(err_);
 
+    printf("\n%s\n", text_err);
+
     long long cur_time = time(NULL);
     fprintf(dump_file, "\n---------------------------------\n");
     fprintf(dump_file, "\nCurrent time: %s\n", ctime(&cur_time));
@@ -490,11 +492,11 @@ void StackDump(Stack_t* stack, TypeError err_ , LOCATION location_call) {
 
     if (!_txIsBadReadPtr(stack)) {
 #if DEBUG_MODE == DEBUG_MODE_ON
-        fprintf(dump_file, "\nDeclareded variable: %s<%s> [0x%p] in File: %s   in Function: %s    in Line: %d\n",
+        fprintf(dump_file, "\nDeclareded variable: %s<%s> [0x%x] in File: %s   in Function: %s    in Line: %d\n",
             stack->location.var_name, stack->location.var_type, 
             stack, stack->location.file_name, stack->location.func_name, stack->location.num_line);
 
-        fprintf(dump_file, "\nNow variable: %s<%s> [0x%p] in File: %s   in Function: %s    in Line: %d\n",
+        fprintf(dump_file, "\nNow variable: %s<%s> [0x%x] in File: %s   in Function: %s    in Line: %d\n",
             location_call.var_name, location_call.var_type, stack, location_call.file_name, location_call.func_name, location_call.num_line);
 #endif
 
@@ -528,7 +530,7 @@ void StackDump(Stack_t* stack, TypeError err_ , LOCATION location_call) {
 #endif
 
         if (!_txIsBadReadPtr(stack->data)) {
-            fprintf(dump_file, "\tdata[0x%p] {\n", stack->data);
+            fprintf(dump_file, "\tdata[0x%x] {\n", stack->data);
 
             for (size_t num_elem = 0; num_elem < stack->capacity; ++num_elem) {
                 if (!_txIsBadReadPtr(stack->data + num_elem)) {
@@ -554,7 +556,7 @@ void StackDump(Stack_t* stack, TypeError err_ , LOCATION location_call) {
 #if DEBUG_MODE == DEBUG_MODE_ON
     else {
         fprintf(dump_file, 
-            "Now variable: %s<%s> [0x%p] in File: %s   in Function: %s    in Line: %d\n",
+            "Now variable: %s<%s> [0x%x] in File: %s   in Function: %s    in Line: %d\n",
             location_call.var_name, location_call.var_type, "ERROR", location_call.file_name, 
             location_call.func_name, location_call.num_line);
     }

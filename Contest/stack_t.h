@@ -74,11 +74,11 @@ typedef unsigned long long StackCanaryElem_t;
 
 #define STACK_RESIZE_MORE_CONST     16
 
-const unsigned long long CANARY_DEFAULT_STRUCT_START = 1548693173; //  0x5C4F2EB5
-const unsigned long long CANARY_DEFAULT_STRUCT_END = 1934672158; //  0x7350C11E
+const unsigned long long CANARY_DEFAULT_STRUCT_START = 0x5C4F2EB5; // 1548693173
+const unsigned long long CANARY_DEFAULT_STRUCT_END   = 0x7350C11E; // 1934672158
 
-const unsigned long long CANARY_DEFAULT_DATA_START = 2167903461; //  0x813794E5
-const unsigned long long CANARY_DEFAULT_DATA_END = 2046973156; //  0x7A0254E4
+const unsigned long long CANARY_DEFAULT_DATA_START   = 0x813794E5; // 2167903461
+const unsigned long long CANARY_DEFAULT_DATA_END     = 0x7A0254E4; // 2046973156
 
 struct Stack_t {
 #if STACK_LEVEL_PROTECTION >= STACK_CANARY_PROTECTION 
