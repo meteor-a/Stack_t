@@ -1,27 +1,25 @@
 
 ---------------------------------
 
-Current time: Sat Oct  2 00:05:41 2021
+Current time: Sat Oct  2 00:26:52 2021
 
 
-Time of last build: Oct  2 2021  00:05:38
+Time of last build: Oct  2 2021  00:25:30
 
-Error: Calling the stack constructor again
+Error: Stack was already destruct
 
-Declareded variable: (null)<(null)> [0x7055f500] in File: (null)   in Function: (null)    in Line: 0
+Now variable: stack<int> [0x57f5f9a0] in File: C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp   in Function: StackTypeOKCanaryProtection    in Line: 295
+	capacity: -1
+	size:     -1
 
-Now variable: stack<int> [0x7055f500] in File: C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\Contest.cpp   in Function: main    in Line: 6
-	capacity: -858993460
-	size:     -858993460
-
-	canary_start_struct:         3435973836
+	canary_start_struct:         4294967295
 	default canary_start_struct: 1548693173
 
-	canary_end_struct:           3435973836
+	canary_end_struct:           4294967295
 	default canary_end_struct:   1934672158
 
-	hash_struct_last_changed:    -858993460
-	hash_struct_now:             1722407584
+	hash_struct_last_changed:    -1
+	hash_struct_now:             1393018754
 
 	data[ERROR] 
 

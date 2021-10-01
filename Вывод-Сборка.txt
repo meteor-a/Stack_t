@@ -1,0 +1,75 @@
+﻿Сборка начата…
+1>------ Сборка начата: проект: Contest, Конфигурация: Debug x64 ------
+1>stack_t.cpp
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(82,29): warning C4245: =: преобразование "int" в "StackCanaryElem_t", несоответствие типов со знаком и без
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(83,29): warning C4245: =: преобразование "int" в "StackCanaryElem_t", несоответствие типов со знаком и без
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(399,40): warning C4018: <: несоответствие типов со знаком и без знака
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(510,32): warning C4477: "fprintf": в строке форматирования "%x" требуется аргумент типа "unsigned int", но вариативный аргумент "3" имеет тип "Stack_t *"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(510,32): warning C4313: fprintf: конфликт "%x" в строке формата с аргументом 3 типа "Stack_t *"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(510,32): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "6" имеет тип "__int64"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(510,32): message : рекомендуется использовать "%lld" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(510,32): message : рекомендуется использовать "%Id" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(510,32): message : рекомендуется использовать "%I64d" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(515,28): warning C4477: "fprintf": в строке форматирования "%x" требуется аргумент типа "unsigned int", но вариативный аргумент "3" имеет тип "Stack_t *"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(515,28): warning C4313: fprintf: конфликт "%x" в строке формата с аргументом 3 типа "Stack_t *"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(515,28): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "6" имеет тип "__int64"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(515,28): message : рекомендуется использовать "%lld" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(515,28): message : рекомендуется использовать "%Id" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(515,28): message : рекомендуется использовать "%I64d" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(520,28): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "__int64"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(520,28): message : рекомендуется использовать "%lld" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(520,28): message : рекомендуется использовать "%Id" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(520,28): message : рекомендуется использовать "%I64d" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(521,28): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "__int64"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(521,28): message : рекомендуется использовать "%lld" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(521,28): message : рекомендуется использовать "%Id" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(521,28): message : рекомендуется использовать "%I64d" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(526,28): warning C4477: "fprintf": в строке форматирования "%u" требуется аргумент типа "unsigned int", но вариативный аргумент "1" имеет тип "StackCanaryElem_t"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(526,28): message : рекомендуется использовать "%llu" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(526,28): message : рекомендуется использовать "%Iu" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(526,28): message : рекомендуется использовать "%I64u" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(527,28): warning C4477: "fprintf": в строке форматирования "%u" требуется аргумент типа "unsigned int", но вариативный аргумент "1" имеет тип "const unsigned __int64"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(527,28): message : рекомендуется использовать "%llu" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(527,28): message : рекомендуется использовать "%Iu" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(527,28): message : рекомендуется использовать "%I64u" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(531,28): warning C4477: "fprintf": в строке форматирования "%u" требуется аргумент типа "unsigned int", но вариативный аргумент "1" имеет тип "StackCanaryElem_t"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(531,28): message : рекомендуется использовать "%llu" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(531,28): message : рекомендуется использовать "%Iu" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(531,28): message : рекомендуется использовать "%I64u" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(532,28): warning C4477: "fprintf": в строке форматирования "%u" требуется аргумент типа "unsigned int", но вариативный аргумент "1" имеет тип "const unsigned __int64"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(532,28): message : рекомендуется использовать "%llu" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(532,28): message : рекомендуется использовать "%Iu" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(532,28): message : рекомендуется использовать "%I64u" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(538,28): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "__int64"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(538,28): message : рекомендуется использовать "%lld" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(538,28): message : рекомендуется использовать "%Id" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(538,28): message : рекомендуется использовать "%I64d" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(539,28): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "__int64"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(539,28): message : рекомендуется использовать "%lld" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(539,28): message : рекомендуется использовать "%Id" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(539,28): message : рекомендуется использовать "%I64d" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(546,32): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "__int64"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(546,32): message : рекомендуется использовать "%lld" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(546,32): message : рекомендуется использовать "%Id" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(546,32): message : рекомендуется использовать "%I64d" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(547,32): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "__int64"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(547,32): message : рекомендуется использовать "%lld" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(547,32): message : рекомендуется использовать "%Id" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(547,32): message : рекомендуется использовать "%I64d" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(551,32): warning C4477: "fprintf": в строке форматирования "%x" требуется аргумент типа "unsigned int", но вариативный аргумент "1" имеет тип "StackElem_t *"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(551,32): warning C4313: fprintf: конфликт "%x" в строке формата с аргументом 1 типа "StackElem_t *"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(553,48): warning C4018: <: несоответствие типов со знаком и без знака
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(555,34): warning C4018: <: несоответствие типов со знаком и без знака
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(556,44): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "size_t"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(556,44): message : рекомендуется использовать "%zd" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(559,44): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "size_t"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(559,44): message : рекомендуется использовать "%zd" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(577,13): warning C4477: "fprintf": в строке форматирования "%x" требуется аргумент типа "unsigned int", но вариативный аргумент "3" имеет тип "const char *"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(577,13): warning C4313: fprintf: конфликт "%x" в строке формата с аргументом 3 типа "const char *"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(577,13): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "6" имеет тип "__int64"
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(577,13): message : рекомендуется использовать "%lld" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(577,13): message : рекомендуется использовать "%Id" в строке форматирования
+1>C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp(577,13): message : рекомендуется использовать "%I64d" в строке форматирования
+1>Contest.vcxproj -> C:\Users\maxim\source\repos\meteor-a\Stack_t\x64\Debug\Contest.exe
+1>Сборка проекта "Contest.vcxproj" завершена.
+========== Сборка: успешно: 1, с ошибками: 0, без изменений: 0, пропущено: 0 ==========
