@@ -118,13 +118,9 @@ struct Stack_t {
         StackAbort(obj, StackType##OK(obj), LOCATION{__FILE__, __FUNCTION__, __LINE__, typeid(StackElem_t).name(), #obj});     \
     }
 
-#if DEBUG_MODE == DEBUG_MODE_ON
-TypeError StackConstructor_(Stack_t* stack, LOCATION location_call);
 #define StackConstructor(stack) StackConstructor_(&stack, LOCATION {__FILE__, __FUNCTION__, __LINE__, typeid(StackElem_t).name(), #stack});
-#elif
-TypeError StackConstructor_(Stack_t* stack);
-#define StackConstructor(stack) StackConstructor_(&stack);
-#endif
+
+TypeError StackConstructor_(Stack_t* stack, LOCATION location_call);
 
 bool      CheckIsWasAlreadyConstract(Stack_t* stack, LOCATION location_call);
 

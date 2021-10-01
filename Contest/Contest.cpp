@@ -8,6 +8,4 @@ int main() {
     stack.size = 5;
 
     StackDestructor(&stack);
-
-    int tt = 0;
 }

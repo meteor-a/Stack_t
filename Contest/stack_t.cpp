@@ -119,7 +119,8 @@ TypeError StackPop(Stack_t* stack) {
     ASSERT_OK(stack);
 
     if (stack->size - 1 < 0) {
-        StackAbort(stack, TypeError::_ERROR_POP_ON_EMPTY_STACK, LOCATION{ __FILE__, __FUNCTION__, __LINE__, stack->location.var_type, "stack" });
+        StackAbort(stack, TypeError::_ERROR_POP_ON_EMPTY_STACK, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
+                    stack->location.var_type, "stack" });
     }
 
     stack->data[stack->size - 1] = DEFAULT_EMPTY_ELEM_OF_STACK;
@@ -141,7 +142,8 @@ StackElem_t StackTop(Stack_t* stack) {
     ASSERT_OK(stack);
 
     if (stack->size - 1 < 0) {
-        StackAbort(stack, TypeError::_ERROR_TOP_ON_EMPTY_STACK, LOCATION{ __FILE__, __FUNCTION__, __LINE__, stack->location.var_type, "stack" });
+        StackAbort(stack, TypeError::_ERROR_TOP_ON_EMPTY_STACK, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
+                   stack->location.var_type, "stack" });
     }
 
     return stack->data[stack->size - 1];
@@ -165,10 +167,12 @@ TypeError StackDataAllocation(Stack_t* stack) {
         is_need_move_pointer_data = true;
     } else if (stack->size == 0 && stack->capacity == DEFAULT_CAPACITY && stack->data ==  nullptr) {   // INIZIALIZE
         if (stack == nullptr) {
-            StackAbort(stack, TypeError::_ERROR_NULL_OBJ, LOCATION{ __FILE__, __FUNCTION__, __LINE__, typeid(StackElem_t).name(), "stack" });
+            StackAbort(stack, TypeError::_ERROR_NULL_OBJ, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
+                       typeid(StackElem_t).name(), "stack" });
         }
         if (_txIsBadReadPtr(stack)) {
-            StackAbort(stack, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, typeid(StackElem_t).name(), "stack" });
+            StackAbort(stack, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
+                       typeid(StackElem_t).name(), "stack" });
         }
     }
     else {
@@ -181,7 +185,8 @@ TypeError StackDataAllocation(Stack_t* stack) {
     stack->data = (StackElem_t*)realloc(stack->data, new_size);
 
     if (stack->data == nullptr) {
-        StackAbort(stack, TypeError::_ERROR_NULL_POINTER_DATA, LOCATION{ __FILE__, __FUNCTION__, __LINE__, typeid(StackElem_t).name(), "stack" });
+        StackAbort(stack, TypeError::_ERROR_NULL_POINTER_DATA, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
+                   typeid(StackElem_t).name(), "stack" });
     }
 #endif
 
@@ -194,7 +199,8 @@ TypeError StackDataAllocation(Stack_t* stack) {
     stack->data = (StackElem_t*) ((char*)realloc((char*)stack->data, new_size));
 
     if (stack->data == nullptr) {
-        StackAbort(stack, TypeError::_ERROR_NULL_POINTER_DATA, LOCATION{ __FILE__, __FUNCTION__, __LINE__, typeid(StackElem_t).name(), "stack" });
+        StackAbort(stack, TypeError::_ERROR_NULL_POINTER_DATA, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
+                   typeid(StackElem_t).name(), "stack" });
     }
 
     *((StackCanaryElem_t*) stack->data) = CANARY_DEFAULT_DATA_START;
@@ -343,7 +349,8 @@ TypeError StackTypeOKHashProtection(Stack_t* stack) {
 #if STACK_LEVEL_PROTECTION >= STACK_HASH_PROTECTION
 TypeError HashReCalculate(Stack_t* stack) {
     if (_txIsBadReadPtr(stack)) {
-        StackAbort(stack, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, typeid(StackElem_t).name(), "stack" });
+        StackAbort(stack, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
+                   typeid(StackElem_t).name(), "stack" });
     }
 
     TypeError err = TypeError::_SUCCESSFUL;
@@ -355,7 +362,8 @@ TypeError HashReCalculate(Stack_t* stack) {
 #endif
 
     if (err != TypeError::_SUCCESSFUL) {
-        StackDump(stack, TypeError::_ERROR_INIZIALIZE_DATA, LOCATION{ __FILE__, __FUNCTION__, __LINE__, stack->location.var_type, "stack" });
+        StackDump(stack, TypeError::_ERROR_INIZIALIZE_DATA, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
+                  stack->location.var_type, "stack" });
         abort();
     }
 
@@ -372,20 +380,24 @@ TypeError HashReCalculate(Stack_t* stack) {
 /* Hash function djb2 http://www.cse.yorku.ca/~oz/hash.html */
 long long HashFunc(void* start_hash, void* end_hash) {
     if (_txIsBadReadPtr(start_hash)) {
-        StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, "void*", "start_hash" });
+        StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
+                   "void*", "start_hash" });
     }
     if (_txIsBadReadPtr(end_hash)) {
-        StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, "void*", "end_hash" });
+        StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
+                   "void*", "end_hash" });
     }
 
     if (!(start_hash < end_hash)) {
-        StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, "void*", "start_hash, end_hash" });
+        StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
+                   "void*", "start_hash, end_hash" });
     }
 
     long long res_hash_func = 0;
     for (size_t num_byte = 0; num_byte < (char*)end_hash - (char*)start_hash; ++num_byte) {
         if (_txIsBadReadPtr((char*)start_hash + num_byte)) {
-            StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, "void*", "start_hash" });
+            StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
+                       "void*", "start_hash" });
         }
         char byte_value = *((char*)start_hash + num_byte);
         res_hash_func = ((res_hash_func << 5) + res_hash_func) + byte_value;
@@ -497,7 +509,8 @@ void StackDump(Stack_t* stack, TypeError err_ , LOCATION location_call) {
             stack, stack->location.file_name, stack->location.func_name, stack->location.num_line);
 
         fprintf(dump_file, "\nNow variable: %s<%s> [0x%x] in File: %s   in Function: %s    in Line: %d\n",
-            location_call.var_name, location_call.var_type, stack, location_call.file_name, location_call.func_name, location_call.num_line);
+            location_call.var_name, location_call.var_type, stack, 
+            location_call.file_name, location_call.func_name, location_call.num_line);
 #endif
 
         fprintf(dump_file, "\tcapacity: %d\n", stack->capacity);
