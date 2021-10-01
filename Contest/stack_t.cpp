@@ -369,6 +369,7 @@ TypeError HashReCalculate(Stack_t* stack) {
     return TypeError::_SUCCESSFUL;
 }
 
+/* Hash function djb2 http://www.cse.yorku.ca/~oz/hash.html */
 long long HashFunc(void* start_hash, void* end_hash) {
     if (_txIsBadReadPtr(start_hash)) {
         StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, "void*", "start_hash" });
