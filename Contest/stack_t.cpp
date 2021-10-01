@@ -388,9 +388,7 @@ long long HashFunc(void* start_hash, void* end_hash) {
             StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, "void*", "start_hash" });
         }
         char byte_value = *((char*)start_hash + num_byte);
-        char temp_1 = byte_value & 1;
-        char temp_2 = byte_value | 7;
-        res_hash_func += (temp_1 << temp_2) * byte_value;
+        res_hash_func = ((res_hash_func << 5) + res_hash_func) + byte_value;
     }
 
     return res_hash_func;
