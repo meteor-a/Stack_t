@@ -1,13 +1,12 @@
 #include "stack_t.h"
 
-//TypeError StackConstructor_(Stack_t* stack DEBUG_CODE(, LOCATION location_call)) {
-TypeError StackConstructor_(Stack_t* stack, LOCATION location_call) {
+TypeError StackConstructor_(Stack_t* stack DEBUG_CODE_ADD(, LOCATION location_call)) {
     if (_txIsBadReadPtr(stack)) {
-        StackAbort(stack, TypeError::_ERROR_SEGMENTATION_FAULT, location_call);
+        StackAbort(stack, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, location_call));
     }
 
-    if (CheckIsWasAlreadyConstract(stack, location_call)) {
-        StackAbort(stack, TypeError::_ERROR_REPEAT_CONSTRACT, location_call);
+    if (CheckIsWasAlreadyConstract(stack DEBUG_CODE_ADD(, location_call))) {
+        StackAbort(stack, TypeError::_ERROR_REPEAT_CONSTRACT DEBUG_CODE_ADD(, location_call));
     }
 
 #if STACK_LEVEL_PROTECTION >= STACK_CANARY_PROTECTION 
@@ -15,9 +14,7 @@ TypeError StackConstructor_(Stack_t* stack, LOCATION location_call) {
     stack->canary_end   = CANARY_DEFAULT_STRUCT_END;
 #endif
 
-#if DEBUG_MODE == DEBUG_MODE_ON
-    stack->location = location_call;
-#endif
+   // DEBUG_CODE_ADD(stack->location = location_call;);
 
     stack->capacity = DEFAULT_CAPACITY;
     stack->size = 0;
@@ -37,9 +34,9 @@ TypeError StackConstructor_(Stack_t* stack, LOCATION location_call) {
     return TypeError::_SUCCESSFUL;
 }
 
-bool CheckIsWasAlreadyConstract(Stack_t* stack, LOCATION location_call) {
+bool CheckIsWasAlreadyConstract(Stack_t* stack DEBUG_CODE_ADD(, LOCATION location_call)) {
     if (_txIsBadReadPtr(stack)) {
-        StackAbort(stack, TypeError::_ERROR_SEGMENTATION_FAULT, location_call);
+        StackAbort(stack, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, location_call));
     }
 
     if (stack->data     == nullptr &&
@@ -56,7 +53,7 @@ bool CheckIsWasAlreadyConstract(Stack_t* stack, LOCATION location_call) {
         if (stack->canary_start == 0 &&
             stack->canary_end   == 0 &&
             stack->hash_struct  == 0 &&
-            stack->hash_struct  == 0) {
+            stack->hash_data    == 0) {
 
             return false;
         }
@@ -71,7 +68,7 @@ bool CheckIsWasAlreadyConstract(Stack_t* stack, LOCATION location_call) {
 TypeError StackDestructor(Stack_t* stack) {
     ASSERT_OK(stack);
 
-//    DataPoisonElemsInizialize((*stack), (*stack)->data, (*stack)->data + (*stack)->capacity);
+    DataPoisonElemsInizialize(stack->data, stack->data + stack->capacity);
 
 #if STACK_LEVEL_PROTECTION < STACK_CANARY_PROTECTION
     free(stack->data);
@@ -119,8 +116,8 @@ TypeError StackPop(Stack_t* stack) {
     ASSERT_OK(stack);
 
     if (stack->size - 1 < 0) {
-        StackAbort(stack, TypeError::_ERROR_POP_ON_EMPTY_STACK, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
-                    stack->location.var_type, "stack" });
+        StackAbort(stack, TypeError::_ERROR_POP_ON_EMPTY_STACK DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__,
+                    stack->location.var_type, "stack" }));
     }
 
     stack->data[stack->size - 1] = DEFAULT_EMPTY_ELEM_OF_STACK;
@@ -142,8 +139,8 @@ StackElem_t StackTop(Stack_t* stack) {
     ASSERT_OK(stack);
 
     if (stack->size - 1 < 0) {
-        StackAbort(stack, TypeError::_ERROR_TOP_ON_EMPTY_STACK, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
-                   stack->location.var_type, "stack" });
+        StackAbort(stack, TypeError::_ERROR_TOP_ON_EMPTY_STACK DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__,
+                   stack->location.var_type, "stack" }));
     }
 
     return stack->data[stack->size - 1];
@@ -167,12 +164,12 @@ TypeError StackDataAllocation(Stack_t* stack) {
         is_need_move_pointer_data = true;
     } else if (stack->size == 0 && stack->capacity == DEFAULT_CAPACITY && stack->data ==  nullptr) {   // INIZIALIZE
         if (stack == nullptr) {
-            StackAbort(stack, TypeError::_ERROR_NULL_OBJ, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
-                       typeid(StackElem_t).name(), "stack" });
+            StackAbort(stack, TypeError::_ERROR_NULL_OBJ DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__,
+                       typeid(StackElem_t).name(), "stack" }));
         }
         if (_txIsBadReadPtr(stack)) {
-            StackAbort(stack, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
-                       typeid(StackElem_t).name(), "stack" });
+            StackAbort(stack, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__,
+                       typeid(StackElem_t).name(), "stack" }));
         }
     }
     else {
@@ -185,8 +182,8 @@ TypeError StackDataAllocation(Stack_t* stack) {
     stack->data = (StackElem_t*)realloc(stack->data, new_size);
 
     if (stack->data == nullptr) {
-        StackAbort(stack, TypeError::_ERROR_NULL_POINTER_DATA, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
-                   typeid(StackElem_t).name(), "stack" });
+        StackAbort(stack, TypeError::_ERROR_NULL_POINTER_DATA DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__,
+                   typeid(StackElem_t).name(), "stack" }));
     }
 #endif
 
@@ -199,8 +196,8 @@ TypeError StackDataAllocation(Stack_t* stack) {
     stack->data = (StackElem_t*) ((char*)realloc((char*)stack->data, new_size));
 
     if (stack->data == nullptr) {
-        StackAbort(stack, TypeError::_ERROR_NULL_POINTER_DATA, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
-                   typeid(StackElem_t).name(), "stack" });
+        StackAbort(stack, TypeError::_ERROR_NULL_POINTER_DATA DEBUG_CODE_ADD(, LOCATION{ __FILE__, __FUNCTION__, __LINE__,
+                   typeid(StackElem_t).name(), "stack" }));
     }
 
     *((StackCanaryElem_t*) stack->data) = CANARY_DEFAULT_DATA_START;
@@ -225,16 +222,16 @@ TypeError StackDataAllocation(Stack_t* stack) {
 
 void DataPoisonElemsInizialize(StackElem_t* start, StackElem_t* end) {
     if (end - start < 0) {
-        StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__,
-                           typeid(StackElem_t).name(), "end - start < 0" });
+        StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, LOCATION{ __FILE__, __FUNCTION__, __LINE__,
+                           typeid(StackElem_t).name(), "end - start < 0" }));
     }
 
     size_t lenght = end - start;
 
     for (size_t num_elem = 0; num_elem < lenght; ++num_elem) {
         if (_txIsBadReadPtr(start + num_elem)) {
-            StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
-                       typeid(StackElem_t).name(), "start + num_elem" });
+            StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, LOCATION{ __FILE__, __FUNCTION__, __LINE__,
+                       typeid(StackElem_t).name(), "start + num_elem" }));
         }
         *(start + num_elem) = DEFAULT_EMPTY_ELEM_OF_STACK;
     }
@@ -290,7 +287,7 @@ TypeError StackTypeOKStandartProtection(Stack_t* stack) {
 TypeError StackTypeOKCanaryProtection(Stack_t* stack) {
     TypeError err = StackTypeOKStandartProtection(stack);
     if (err != TypeError::_SUCCESSFUL) {
-        StackAbort(stack, err, LOCATION{ __FILE__, __FUNCTION__, __LINE__, typeid(StackElem_t).name(), "stack" });
+        StackAbort(stack, err DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__, typeid(StackElem_t).name(), "stack" }));
     }
 
     if (stack->canary_start != CANARY_DEFAULT_STRUCT_START) {
@@ -314,7 +311,7 @@ TypeError StackTypeOKCanaryProtection(Stack_t* stack) {
 TypeError StackTypeOKHashProtection(Stack_t* stack) {
     TypeError err = StackTypeOKCanaryProtection(stack);
     if (err != TypeError::_SUCCESSFUL) {
-        StackAbort(stack, err, LOCATION{ __FILE__, __FUNCTION__, __LINE__, typeid(StackElem_t).name(), "stack" });
+        StackAbort(stack, err DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__, typeid(StackElem_t).name(), "stack" }));
     }
 
     long long saved_hash_struct = stack->hash_struct;
@@ -323,7 +320,7 @@ TypeError StackTypeOKHashProtection(Stack_t* stack) {
     stack->hash_struct = 0;
     stack->hash_data   = 0;
 
-    long long cur_hash_struct = HashFunc(stack, (char*)stack + sizeof(Stack_t));
+    long long cur_hash_struct = HashFunc(stack      , (char*)stack + sizeof(Stack_t));
     long long cur_hash_data   = HashFunc(stack->data, stack->data + stack->capacity);
 
     stack->hash_struct = saved_hash_struct;
@@ -349,8 +346,8 @@ TypeError StackTypeOKHashProtection(Stack_t* stack) {
 #if STACK_LEVEL_PROTECTION >= STACK_HASH_PROTECTION
 TypeError HashReCalculate(Stack_t* stack) {
     if (_txIsBadReadPtr(stack)) {
-        StackAbort(stack, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
-                   typeid(StackElem_t).name(), "stack" });
+        StackAbort(stack, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__,
+                   typeid(StackElem_t).name(), "stack" }));
     }
 
     TypeError err = TypeError::_SUCCESSFUL;
@@ -362,8 +359,8 @@ TypeError HashReCalculate(Stack_t* stack) {
 #endif
 
     if (err != TypeError::_SUCCESSFUL) {
-        StackDump(stack, TypeError::_ERROR_INIZIALIZE_DATA, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
-                  stack->location.var_type, "stack" });
+        StackDump(stack, TypeError::_ERROR_INIZIALIZE_DATA DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__,
+                  stack->location.var_type, "stack" }));
         abort();
     }
 
@@ -380,24 +377,24 @@ TypeError HashReCalculate(Stack_t* stack) {
 /* Hash function djb2 http://www.cse.yorku.ca/~oz/hash.html */
 long long HashFunc(void* start_hash, void* end_hash) {
     if (_txIsBadReadPtr(start_hash)) {
-        StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
-                   "void*", "start_hash" });
+        StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, LOCATION{ __FILE__, __FUNCTION__, __LINE__,
+                   "void*", "start_hash" }));
     }
     if (_txIsBadReadPtr(end_hash)) {
-        StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
-                   "void*", "end_hash" });
+        StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__,
+                   "void*", "end_hash" }));
     }
 
     if (!(start_hash < end_hash)) {
-        StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
-                   "void*", "start_hash, end_hash" });
+        StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, LOCATION{ __FILE__, __FUNCTION__, __LINE__,
+                   "void*", "start_hash, end_hash" }));
     }
 
     long long res_hash_func = 0;
     for (size_t num_byte = 0; num_byte < (char*)end_hash - (char*)start_hash; ++num_byte) {
         if (_txIsBadReadPtr((char*)start_hash + num_byte)) {
-            StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT, LOCATION{ __FILE__, __FUNCTION__, __LINE__, 
-                       "void*", "start_hash" });
+            StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, LOCATION{ __FILE__, __FUNCTION__, __LINE__,
+                       "void*", "start_hash" }));
         }
         char byte_value = *((char*)start_hash + num_byte);
         res_hash_func = ((res_hash_func << 5) + res_hash_func) + byte_value;
@@ -407,8 +404,8 @@ long long HashFunc(void* start_hash, void* end_hash) {
 }
 #endif
 
-void StackAbort(Stack_t* stack, TypeError err_ , LOCATION location_call) {
-    StackDump(stack, err_, location_call);
+void StackAbort(Stack_t* stack, TypeError err_ DEBUG_CODE_ADD(, LOCATION location_call)) {
+    StackDump(stack, err_ DEBUG_CODE_ADD(, location_call));
     abort();
 }
 
@@ -486,7 +483,7 @@ const char* StackGetTextError(TypeError err) {
     return text_err;
 }
 
-void StackDump(Stack_t* stack, TypeError err_ , LOCATION location_call) {
+void StackDump(Stack_t* stack, TypeError err_ DEBUG_CODE_ADD(, LOCATION location_call)) {
     FILE* dump_file = fopen("dump_stack.txt", "w");
     assert(dump_file != nullptr);
 

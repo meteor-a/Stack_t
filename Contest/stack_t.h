@@ -10,7 +10,7 @@
 #define DEBUG_MODE_OFF 0
 #define DEBUG_MODE_ON  1
 
-#define DEBUG_MODE DEBUG_MODE_ON
+#define DEBUG_MODE DEBUG_MODE_OFF
 
 #ifndef DEBUG_MODE
 #define DEBUG_MODE DEBUG_MODE_OFF
@@ -103,26 +103,46 @@ struct Stack_t {
 #endif
 };
 
-//#if DEBUG_MODE == DEBUG_MODE_ON
-//#define DEBUG_CODE(code) code
-//#elif
-//#define DEBUG_CODE(code)
-//#endif
+#if DEBUG_MODE == DEBUG_MODE_ON
+    #define DEBUG_CODE_ADD(...) __VA_ARGS__
+#endif
+
+#if DEBUG_MODE == DEBUG_MODE_OFF
+    #define DEBUG_CODE_ADD(...)
+#endif
 
 /*-------------------------------------------------------------------------*/
 
 #define StackType
 
-#define ASSERT_OK(obj)                                                                  \
-    if (StackType##OK(obj) != TypeError::_SUCCESSFUL) {                                 \
-        StackAbort(obj, StackType##OK(obj), LOCATION{__FILE__, __FUNCTION__, __LINE__, typeid(StackElem_t).name(), #obj});     \
+#if DEBUG_MODE == DEBUG_MODE_ON
+#define ASSERT_OK(obj)                                                                \
+    if (StackType##OK(obj) != TypeError::_SUCCESSFUL) {                               \
+        StackAbort(obj, StackType##OK(obj), LOCATION{ __FILE__, __func__, __LINE__,   \
+                   typeid(StackElem_t).name(), #obj });                               \
     }
+#endif
 
-#define StackConstructor(stack) StackConstructor_(&stack, LOCATION {__FILE__, __FUNCTION__, __LINE__, typeid(StackElem_t).name(), #stack});
+#if DEBUG_MODE == DEBUG_MODE_OFF
+#define ASSERT_OK(obj)                                      \
+    if (StackType##OK(obj) != TypeError::_SUCCESSFUL) {     \
+        StackAbort(obj, StackType##OK(obj));                \
+    }
+#endif
 
-TypeError StackConstructor_(Stack_t* stack, LOCATION location_call);
+#if DEBUG_MODE == DEBUG_MODE_ON
+    #define StackConstructor(stack) StackConstructor_(&stack, LOCATION {__FILE__, __FUNCTION__, __LINE__, \
+                             typeid(StackElem_t).name(), #stack});
+#endif
 
-bool      CheckIsWasAlreadyConstract(Stack_t* stack, LOCATION location_call);
+#if DEBUG_MODE == DEBUG_MODE_OFF
+    #define StackConstructor(stack) StackConstructor_(&stack);
+#endif
+
+
+TypeError StackConstructor_(Stack_t* stack DEBUG_CODE_ADD(, LOCATION location_call));
+
+bool      CheckIsWasAlreadyConstract(Stack_t* stack DEBUG_CODE_ADD(, LOCATION location_call));
 
 TypeError StackDestructor(Stack_t* stack);
 
@@ -139,10 +159,10 @@ void      DataPoisonElemsInizialize(StackElem_t* start, StackElem_t* end);
 
 /*-------------------------------------------------------------------------*/
 
-TypeError StackTypeOK(Stack_t* stack);
-TypeError StackTypeOKStandartProtection(Stack_t* stack);
-TypeError StackTypeOKCanaryProtection(Stack_t* stack);
-TypeError StackTypeOKHashProtection(Stack_t* stack);
+TypeError StackTypeOK                   (Stack_t* stack);
+TypeError StackTypeOKStandartProtection (Stack_t* stack);
+TypeError StackTypeOKCanaryProtection   (Stack_t* stack);
+TypeError StackTypeOKHashProtection     (Stack_t* stack);
 
 /*-------------------------------------------------------------------------*/
 
@@ -154,6 +174,6 @@ long long HashFunc       (void* start_hash, void* end_hash);
 
 /*-------------------------------------------------------------------------*/
 
-void        StackAbort        (Stack_t* stack, TypeError err_, LOCATION location_call);
+void        StackAbort        (Stack_t* stack, TypeError err_ DEBUG_CODE_ADD(, LOCATION location_call));
 const char* StackGetTextError (TypeError err);
-void        StackDump         (Stack_t* stack, TypeError err_, LOCATION location_call);
+void        StackDump         (Stack_t* stack, TypeError err_ DEBUG_CODE_ADD(, LOCATION location_call));

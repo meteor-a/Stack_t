@@ -1,16 +1,12 @@
 
 ---------------------------------
 
-Current time: Fri Oct  1 19:18:38 2021
+Current time: Fri Oct  1 20:10:34 2021
 
 
-Time of last build: Oct  1 2021  19:18:34
+Time of last build: Oct  1 2021  20:10:28
 
 Error: Hash struct stack was changed
-
-Declareded variable: stack<int> [0xb40ff9b0] in File: C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\Contest.cpp   in Function: main    in Line: 6
-
-Now variable: stack<int> [0xb40ff9b0] in File: C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp   in Function: StackDestructor    in Line: 72
 	capacity: 16
 	size:     5
 
@@ -20,13 +16,13 @@ Now variable: stack<int> [0xb40ff9b0] in File: C:\Users\maxim\source\repos\meteo
 	canary_end_struct:           1934672158
 	default canary_end_struct:   1934672158
 
-	hash_struct_last_changed:    510629749
-	hash_struct_now:             -219056725
+	hash_struct_last_changed:    1158373417
+	hash_struct_now:             -511215363
 
 	hash_data_last_changed:      1756675904
 	hash_data_now:               1756675904
 
-	data[0xc4e35a68] {
+	data[0xec7434d8] {
 		* [0] = -842150451
 		* [1] = -842150451
 		* [2] = -842150451
@@ -44,5 +40,3 @@ Now variable: stack<int> [0xb40ff9b0] in File: C:\Users\maxim\source\repos\meteo
 		 [14] = -842150451
 		 [15] = -842150451
 	}
-
----------------------------------
