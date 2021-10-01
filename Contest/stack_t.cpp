@@ -14,7 +14,7 @@ TypeError StackConstructor_(Stack_t* stack DEBUG_CODE_ADD(, LOCATION location_ca
     stack->canary_end   = CANARY_DEFAULT_STRUCT_END;
 #endif
 
-   // DEBUG_CODE_ADD(stack->location = location_call;);
+    DEBUG_CODE_ADD(stack->location = location_call;);
 
     stack->capacity = DEFAULT_CAPACITY;
     stack->size = 0;
@@ -193,7 +193,7 @@ TypeError StackDataAllocation(Stack_t* stack) {
     if (is_need_move_pointer_data) {
         stack->data = (StackElem_t*)((char*)stack->data - sizeof(StackCanaryElem_t));
     }
-    stack->data = (StackElem_t*) ((char*)realloc((char*)stack->data, new_size));
+    stack->data = (StackElem_t*) ((char*) realloc((char*)stack->data, new_size));
 
     if (stack->data == nullptr) {
         StackAbort(stack, TypeError::_ERROR_NULL_POINTER_DATA DEBUG_CODE_ADD(, LOCATION{ __FILE__, __FUNCTION__, __LINE__,
@@ -265,6 +265,9 @@ TypeError StackTypeOKStandartProtection(Stack_t* stack) {
     }
     if (stack->data == nullptr) {
         return TypeError::_ERROR_NULL_POINTER_DATA;
+    }
+    if (stack->data == (StackElem_t*) Poison::pNullData) {
+        return TypeError::_ERROR_STACK_DESTRUCT;
     }
     if (_txIsBadReadPtr(stack->data)) {
         return TypeError::_ERROR_SEGMENTATION_FAULT;
@@ -532,14 +535,15 @@ void StackDump(Stack_t* stack, TypeError err_ DEBUG_CODE_ADD(, LOCATION location
         fprintf(dump_file, "\thash_struct_now:             %d\n", HashFunc(stack, (char*)stack + sizeof(Stack_t)));
 
         fprintf(dump_file, "\n");
-
-        fprintf(dump_file, "\thash_data_last_changed:      %d\n", stack->hash_data);
-        fprintf(dump_file, "\thash_data_now:               %d\n", HashFunc(stack->data, stack->data + stack->capacity));
-
-        fprintf(dump_file, "\n");
 #endif
 
         if (!_txIsBadReadPtr(stack->data)) {
+#if STACK_LEVEL_PROTECTION >= STACK_HASH_PROTECTION
+            fprintf(dump_file, "\thash_data_last_changed:      %d\n", stack->hash_data);
+            fprintf(dump_file, "\thash_data_now:               %d\n", HashFunc(stack->data, stack->data + stack->capacity));
+
+            fprintf(dump_file, "\n");
+#endif
             fprintf(dump_file, "\tdata[0x%x] {\n", stack->data);
 
             for (size_t num_elem = 0; num_elem < stack->capacity; ++num_elem) {
@@ -573,4 +577,6 @@ void StackDump(Stack_t* stack, TypeError err_ DEBUG_CODE_ADD(, LOCATION location
 
     fprintf(dump_file, "\n---------------------------------\n");
 #endif
+
+    fclose(dump_file);
 }

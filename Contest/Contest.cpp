@@ -5,7 +5,7 @@ int main() {
     Stack_t stack = {};
     StackConstructor(stack);
 
-    stack.size = 5;
-
     StackDestructor(&stack);
+
+    StackPush(&stack, 4);
 }

@@ -6,11 +6,10 @@
 #include <typeinfo>
 #include "TXLib.h"
 
-
 #define DEBUG_MODE_OFF 0
 #define DEBUG_MODE_ON  1
 
-#define DEBUG_MODE DEBUG_MODE_OFF
+#define DEBUG_MODE DEBUG_MODE_ON
 
 #ifndef DEBUG_MODE
 #define DEBUG_MODE DEBUG_MODE_OFF
@@ -52,7 +51,7 @@ enum class TypeError {
 };
 
 enum class Poison {
-    pNullStack,
+    pNullptr,
     pNullData
 };
 
@@ -66,7 +65,7 @@ struct LOCATION {
 };
 #endif
 
-typedef int StackElem_t;
+typedef int                StackElem_t;
 typedef unsigned long long StackCanaryElem_t;
 
 #define DEFAULT_CAPACITY            16
@@ -111,8 +110,6 @@ struct Stack_t {
     #define DEBUG_CODE_ADD(...)
 #endif
 
-/*-------------------------------------------------------------------------*/
-
 #define StackType
 
 #if DEBUG_MODE == DEBUG_MODE_ON
@@ -140,22 +137,20 @@ struct Stack_t {
 #endif
 
 
-TypeError StackConstructor_(Stack_t* stack DEBUG_CODE_ADD(, LOCATION location_call));
-
-bool      CheckIsWasAlreadyConstract(Stack_t* stack DEBUG_CODE_ADD(, LOCATION location_call));
-
-TypeError StackDestructor(Stack_t* stack);
+TypeError StackConstructor_          (Stack_t* stack DEBUG_CODE_ADD(, LOCATION location_call));
+bool      CheckIsWasAlreadyConstract (Stack_t* stack DEBUG_CODE_ADD(, LOCATION location_call));
+TypeError StackDestructor            (Stack_t* stack);
 
 /*-------------------------------------------------------------------------*/
 
-TypeError   StackPush(Stack_t* stack, StackElem_t val);
-TypeError   StackPop (Stack_t* stack);
-StackElem_t StackTop (Stack_t* stack);
+TypeError   StackPush (Stack_t* stack, StackElem_t val);
+TypeError   StackPop  (Stack_t* stack);
+StackElem_t StackTop  (Stack_t* stack);
 
 /*-------------------------------------------------------------------------*/
 
-TypeError StackDataAllocation(Stack_t* stack);
-void      DataPoisonElemsInizialize(StackElem_t* start, StackElem_t* end);
+TypeError StackDataAllocation       (Stack_t* stack);
+void      DataPoisonElemsInizialize (StackElem_t* start, StackElem_t* end);
 
 /*-------------------------------------------------------------------------*/
 
@@ -167,9 +162,8 @@ TypeError StackTypeOKHashProtection     (Stack_t* stack);
 /*-------------------------------------------------------------------------*/
 
 #if STACK_LEVEL_PROTECTION >= STACK_HASH_PROTECTION 
-TypeError HashReCalculate(Stack_t* stack);
-
-long long HashFunc       (void* start_hash, void* end_hash);
+TypeError HashReCalculate (Stack_t* stack);
+long long HashFunc        (void* start_hash, void* end_hash);
 #endif
 
 /*-------------------------------------------------------------------------*/

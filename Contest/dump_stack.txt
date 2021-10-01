@@ -1,42 +1,28 @@
 
 ---------------------------------
 
-Current time: Fri Oct  1 20:10:34 2021
+Current time: Fri Oct  1 23:47:09 2021
 
 
-Time of last build: Oct  1 2021  20:10:28
+Time of last build: Oct  1 2021  23:47:02
 
-Error: Hash struct stack was changed
-	capacity: 16
-	size:     5
+Error: Stack was already destruct
 
-	canary_start_struct:         1548693173
+Declareded variable: stack<int> [0xef2ff5c0] in File: C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\Contest.cpp   in Function: main    in Line: 6
+
+Now variable: stack<int> [0xef2ff5c0] in File: C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp   in Function: StackTypeOKCanaryProtection    in Line: 293
+	capacity: -1
+	size:     -1
+
+	canary_start_struct:         4294967295
 	default canary_start_struct: 1548693173
 
-	canary_end_struct:           1934672158
+	canary_end_struct:           4294967295
 	default canary_end_struct:   1934672158
 
-	hash_struct_last_changed:    1158373417
-	hash_struct_now:             -511215363
+	hash_struct_last_changed:    -1
+	hash_struct_now:             -1233214904
 
-	hash_data_last_changed:      1756675904
-	hash_data_now:               1756675904
+	data[ERROR] 
 
-	data[0xec7434d8] {
-		* [0] = -842150451
-		* [1] = -842150451
-		* [2] = -842150451
-		* [3] = -842150451
-		* [4] = -842150451
-		 [5] = -842150451
-		 [6] = -842150451
-		 [7] = -842150451
-		 [8] = -842150451
-		 [9] = -842150451
-		 [10] = -842150451
-		 [11] = -842150451
-		 [12] = -842150451
-		 [13] = -842150451
-		 [14] = -842150451
-		 [15] = -842150451
-	}
+---------------------------------
