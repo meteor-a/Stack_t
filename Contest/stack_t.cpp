@@ -202,6 +202,8 @@ TypeError StackDataAllocation(Stack_t* stack) {
                    typeid(StackElem_t).name(), stack->location.var_name }));
     }
 
+    // dfs
+
     *((StackCanaryElem_t*) stack->data) = CANARY_DEFAULT_DATA_START;
 
     stack->data = (StackElem_t*) ((char*)stack->data + sizeof(StackCanaryElem_t));

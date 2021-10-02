@@ -5,7 +5,8 @@ int main() {
     Stack_t stack = {};
     StackConstructor(stack);
 
-    StackDestructor(&stack);
+    stack.capacity = 68;
+    //StackDestructor(&stack);
 
     StackPush(&stack, 4);
 }
