@@ -141,20 +141,12 @@ TypeError StackPop(Stack_t* stack) {
 StackElem_t StackTop(Stack_t* stack) {
     ASSERT_OK(stack);
 
-    if (stack->size - 1 < 0) {
-        StackAbort(stack, TypeError::_ERROR_TOP_ON_EMPTY_STACK DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__,
-                   stack->location.var_type, stack->location.var_name }));
-    }
+    (stack->size - 1) < 0 ? stack->data = nullptr : stack->data = stack->data;
 
     return stack->data[stack->size - 1];
 }
 
 TypeError StackDataAllocation(Stack_t* stack) {
-    if (_txIsBadReadPtr(stack)) {
-        StackAbort(stack, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__,
-                   typeid(StackElem_t).name(), "_ERROR__" }));
-    }
-
     long long capacity_old         = -1;
     bool is_need_hash_recalculate  = false;
     bool is_need_move_pointer_data = false;
@@ -388,15 +380,6 @@ TypeError HashReCalculate(Stack_t* stack) {
 
 /* Hash function djb2 http://www.cse.yorku.ca/~oz/hash.html */
 long long HashFunc(void* start_hash, void* end_hash) {
-    if (_txIsBadReadPtr(start_hash)) {
-        StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, LOCATION{ __FILE__, __FUNCTION__, __LINE__,
-                   "void*", "start_hash" }));
-    }
-    if (_txIsBadReadPtr(end_hash)) {
-        StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__,
-                   "void*", "end_hash" }));
-    }
-
     if (!(start_hash < end_hash)) {
         StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, LOCATION{ __FILE__, __FUNCTION__, __LINE__,
                    "void*", "start_hash, end_hash" }));
@@ -404,10 +387,6 @@ long long HashFunc(void* start_hash, void* end_hash) {
 
     long long res_hash_func = 0;
     for (size_t num_byte = 0; num_byte < (char*)end_hash - (char*)start_hash; ++num_byte) {
-        if (_txIsBadReadPtr((char*)start_hash + num_byte)) {
-            StackAbort(nullptr, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, LOCATION{ __FILE__, __FUNCTION__, __LINE__,
-                       "void*", "start_hash" }));
-        }
         char byte_value = *((char*)start_hash + num_byte);
         res_hash_func = ((res_hash_func << 5) + res_hash_func) + byte_value;
     }
