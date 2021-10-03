@@ -149,6 +149,11 @@ StackElem_t StackTop(Stack_t* stack) {
 }
 
 TypeError StackDataAllocation(Stack_t* stack) {
+    if (_txIsBadReadPtr(stack)) {
+        StackAbort(stack, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, LOCATION{ __FILE__, __func__, __LINE__,
+                   typeid(StackElem_t).name(), "_ERROR__" }));
+    }
+
     long long capacity_old         = -1;
     bool is_need_hash_recalculate  = false;
     bool is_need_move_pointer_data = false;
@@ -195,16 +200,15 @@ TypeError StackDataAllocation(Stack_t* stack) {
     if (is_need_move_pointer_data) {
         stack->data = (StackElem_t*)((char*)stack->data - sizeof(StackCanaryElem_t));
     }
-    stack->data = (StackElem_t*) ((char*) realloc((char*)stack->data, new_size));
+
+    stack->data = (StackElem_t*)((char*)realloc((char*)stack->data, new_size));
 
     if (stack->data == nullptr) {
         StackAbort(stack, TypeError::_ERROR_NULL_POINTER_DATA DEBUG_CODE_ADD(, LOCATION{ __FILE__, __FUNCTION__, __LINE__,
                    typeid(StackElem_t).name(), stack->location.var_name }));
     }
 
-    // dfs
-
-    *((StackCanaryElem_t*) stack->data) = CANARY_DEFAULT_DATA_START;
+    *((StackCanaryElem_t*) (char*)stack->data) = CANARY_DEFAULT_DATA_START;
 
     stack->data = (StackElem_t*) ((char*)stack->data + sizeof(StackCanaryElem_t));
 

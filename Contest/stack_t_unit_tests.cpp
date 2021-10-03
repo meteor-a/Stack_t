@@ -1,34 +1,32 @@
 #include "stack_t.h"
-  /*
+
 void StackUnitTest() {
     printf("\nStart unit tests\n");
     StackConstructorAndDestructorTest();
     StackPushTest();
     StackPopTest();
-    StackDumpTest();
 }
 
 void StackConstructorAndDestructorTest() {
     printf("\nStart unit test: StackConstructorAndDestructorTest\n");
 
-    Stack_t stack;
+    Stack_t stack = {};
     StackConstructor(stack);
-    stack.is_was_constract = false;
-    StackConstructor(stack);
+    StackDestructor(&stack);
 
-    Stack_t stack2;
+    Stack_t stack2 = {};
     StackConstructor(stack2);
     StackDestructor(&stack2);
 
-    Stack_t stack3;
+    Stack_t stack3 = {};
     StackConstructor(stack3);
     StackDestructor(&stack3);
 
-    Stack_t stack4;
+    Stack_t stack4 = {};
     StackConstructor(stack4);
     StackDestructor(&stack4);
 
-    Stack_t stack5;
+    Stack_t stack5 = {};
     StackConstructor(stack5);
     StackDestructor(&stack5);
 
@@ -38,7 +36,7 @@ void StackConstructorAndDestructorTest() {
 void StackPushTest() {
     printf("\nStart unit test: StackPushTest\n");
 
-    Stack_t stack;
+    Stack_t stack = {};
     StackConstructor(stack);
     size_t max_number = 553;
     for (size_t num_elem = 0; num_elem < max_number; ++num_elem) {
@@ -60,7 +58,7 @@ void StackPushTest() {
 void StackPopTest() {
     printf("\Start unit test: StackPopTest\n");
 
-    Stack_t stack;
+    Stack_t stack = {};
     StackConstructor(stack);
     size_t max_number = 553;
     for (size_t num_elem = 0; num_elem <= max_number; ++num_elem) {
@@ -79,12 +77,4 @@ void StackPopTest() {
 
     printf("\End unit test: StackPopTest\n");
 }
-
-void StackDumpTest() {
-    printf("\Start unit test: StackDumpTest\n");
-
-
-
-    printf("\End unit test: StackDumpTest\n");
-}
-                                                          */
+                                                          
