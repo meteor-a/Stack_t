@@ -105,6 +105,7 @@ TypeError StackPush(Stack_t* stack, StackElem_t val) {
 #if STACK_LEVEL_PROTECTION >= STACK_HASH_PROTECTION
     HashReCalculate(stack);
 #endif
+
     if (stack->size == stack->capacity) {
         StackDataAllocation(stack);
     }
