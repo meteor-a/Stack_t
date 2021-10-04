@@ -5,9 +5,8 @@ int main() {
     Stack_t stack = {};
 
     StackConstructor(stack);
-    stack.capacity = 100000000;
-    for (int ii = 0; ii < 30; ++ii) {
-        StackPush(&stack, ii);
+    
+    for (int ii = 0; ii < 5111111; ++ii) {
+        StackConstructor(stack);
     }
-    StackPop(&stack);
 }

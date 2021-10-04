@@ -519,7 +519,7 @@ void StackDump(Stack_t* stack, TypeError err_ DEBUG_CODE_ADD(, LOCATION location
 
     if (!_txIsBadReadPtr(stack)) {
 #if DEBUG_MODE == DEBUG_MODE_ON
-        if (!CheckIsWasAlreadyConstract(stack, location_call)) {
+        if (CheckIsWasAlreadyConstract(stack, location_call)) {
             fprintf(dump_file, "\nDeclareded variable: %s<%s> [0x%x] in File: %s   in Function: %s    in Line: %d\n",
                 stack->location.var_name, stack->location.var_type,
                 stack, stack->location.file_name, stack->location.func_name, stack->location.num_line);

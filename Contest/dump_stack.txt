@@ -1,12 +1,48 @@
 
 ---------------------------------
 
-Current time: Mon Oct  4 13:21:13 2021
+Current time: Mon Oct  4 14:25:51 2021
 
 
-Time of last build: Oct  4 2021  13:20:50
+Time of last build: Oct  4 2021  14:25:48
 
-Error: Error in pointers
-Now variable: end_hash<void*> [0x384f18ac] in File: C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp   in Function: HashFunc    in Line: 403
+Error: Calling the stack constructor again
+
+Declareded variable: (null)<(null)> [0x381cf4e0] in File: (null)   in Function: (null)    in Line: 0
+
+Now variable: stack<int> [0x381cf4e0] in File: C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\Contest.cpp   in Function: main    in Line: 10
+	capacity: 16
+	size:     0
+
+	canary_start_struct:         1548693173
+	default canary_start_struct: 1548693173
+
+	canary_end_struct:           1934672158
+	default canary_end_struct:   1934672158
+
+	hash_struct_last_changed:    -2121194630
+	hash_struct_now:             1041128753
+
+	hash_data_last_changed:      1756675904
+	hash_data_now:               1756675904
+
+	data[0xcca3d468] {
+		 [0] = -842150451
+		 [1] = -842150451
+		 [2] = -842150451
+		 [3] = -842150451
+		 [4] = -842150451
+		 [5] = -842150451
+		 [6] = -842150451
+		 [7] = -842150451
+		 [8] = -842150451
+		 [9] = -842150451
+		 [10] = -842150451
+		 [11] = -842150451
+		 [12] = -842150451
+		 [13] = -842150451
+		 [14] = -842150451
+		 [15] = -842150451
+	}
 
 ---------------------------------
