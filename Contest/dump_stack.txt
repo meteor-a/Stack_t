@@ -1,46 +1,12 @@
 
 ---------------------------------
 
-Current time: Sun Oct  3 11:03:00 2021
+Current time: Mon Oct  4 13:21:13 2021
 
 
-Time of last build: Oct  3 2021  11:02:56
+Time of last build: Oct  4 2021  13:20:50
 
-Error: Size of stack is bigger than capacity of stack
-
-Now variable: stack<int> [0x8fff420] in File: D:\vs_project\meteor-a\Stack_t\Contest\stack_t.cpp   in Function: StackTypeOKCanaryProtection    in Line: 302
-	capacity: 16
-	size:     17
-
-	canary_start_struct:         1548693173
-	default canary_start_struct: 1548693173
-
-	canary_end_struct:           1934672158
-	default canary_end_struct:   1934672158
-
-	hash_struct_last_changed:    213664483
-	hash_struct_now:             2013840769
-
-	hash_data_last_changed:      253191544
-	hash_data_now:               253191544
-
-	data[0xa7ce5d68] {
-		* [0] = 0
-		* [1] = 1
-		* [2] = 2
-		* [3] = 3
-		* [4] = 4
-		* [5] = 5
-		* [6] = 6
-		* [7] = 7
-		* [8] = 8
-		* [9] = 9
-		* [10] = 10
-		* [11] = 11
-		* [12] = 12
-		* [13] = 13
-		* [14] = 14
-		* [15] = 15
-	}
+Error: Error in pointers
+Now variable: end_hash<void*> [0x384f18ac] in File: C:\Users\maxim\source\repos\meteor-a\Stack_t\Contest\stack_t.cpp   in Function: HashFunc    in Line: 403
 
 ---------------------------------

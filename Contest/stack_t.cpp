@@ -5,7 +5,7 @@ TypeError StackConstructor_(Stack_t* stack DEBUG_CODE_ADD(, LOCATION location_ca
         StackAbort(stack, TypeError::_ERROR_SEGMENTATION_FAULT DEBUG_CODE_ADD(, location_call));
     }
 
-    stack->location = {};
+    DEBUG_CODE_ADD(stack->location = {};)
 
     if (CheckIsWasAlreadyConstract(stack DEBUG_CODE_ADD(, location_call))) {
         StackAbort(stack, TypeError::_ERROR_REPEAT_CONSTRACT DEBUG_CODE_ADD(, location_call));
@@ -16,7 +16,7 @@ TypeError StackConstructor_(Stack_t* stack DEBUG_CODE_ADD(, LOCATION location_ca
     stack->canary_end   = CANARY_DEFAULT_STRUCT_END;
 #endif
 
-    DEBUG_CODE_ADD(stack->location = location_call;);
+    DEBUG_CODE_ADD(stack->location = location_call;)
 
     stack->capacity = DEFAULT_CAPACITY;
     stack->size     = 0;
@@ -308,8 +308,14 @@ TypeError StackTypeOKCanaryProtection(Stack_t* stack) {
     if (stack->canary_end   != CANARY_DEFAULT_STRUCT_END) {
         return TypeError::_ERROR_CANARY_STACK_STRUCT_END_DEAD;
     }
+    if (_txIsBadReadPtr((StackCanaryElem_t*)((char*)stack->data - sizeof(StackCanaryElem_t)))) {
+        return TypeError::_ERROR_SEGMENTATION_FAULT;
+    }
     if (*((StackCanaryElem_t*) ((char*)stack->data - sizeof(StackCanaryElem_t))) != CANARY_DEFAULT_DATA_START) {
         return TypeError::_ERROR_CANARY_STACK_DATA_START_DEAD;
+    }
+    if (_txIsBadReadPtr((StackCanaryElem_t*)(stack->data + stack->capacity))) {
+        return TypeError::_ERROR_SEGMENTATION_FAULT;
     }
     if (*((StackCanaryElem_t*) (stack->data + stack->capacity))                  != CANARY_DEFAULT_DATA_END) {
         return TypeError::_ERROR_CANARY_STACK_DATA_END_DEAD;
